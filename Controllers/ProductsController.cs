@@ -24,7 +24,7 @@ namespace InventoryOrderSystem.Controllers
         [HttpGet]
         public async Task<ActionResult> Details(int Id)
         {
-            var product = await applicationDb.Products.Include(p=> p.Category).FirstOrDefaultAsync(p=> p.CategoryId == Id);
+            var product = await applicationDb.Products.Include(p=> p.Category).FirstOrDefaultAsync(p=> p.Id == Id);
             if (product == null)
             {
                 return NotFound();
