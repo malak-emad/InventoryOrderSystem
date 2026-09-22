@@ -1,0 +1,25 @@
+@model InventoryOrderSystem.ViewModels.CreateOrderViewModel
+
+<h2>Create Order</h2>
+
+<form asp-action="Create" method="post">
+
+    <div>
+        <label asp-for="ProductId">Product</label>
+        <select asp-for="ProductId" asp-items="ViewBag.Products">
+            <option value="">-- Select Product --</option>
+        </select>
+        <span asp-validation-for="ProductId"></span>
+    </div>
+
+    <div>
+        <label asp-for="Quantity">Quantity</label>
+        <input asp-for="Quantity" type="number" min="1" />
+        <span asp-validation-for="Quantity"></span>
+    </div>
+
+    <button type="submit">Create Order</button>
+
+</form>
+
+<a asp-controller="Shop" asp-action="Index">Back to Shop</a>

@@ -1,0 +1,47 @@
+@model IEnumerable<InventoryOrderSystem.Models.Product>
+
+<h2>Shop</h2>
+
+<form asp-action="Index" method="get">
+
+    <div>
+        <label for="name">Product Name</label>
+        <input type="text" id="name" name="name" value="@Context.Request.Query["name"]" />
+    </div>
+
+    <div>
+        <label for="categoryId">Category</label>
+
+        <select id="categoryId" name="categoryId" asp-items="ViewBag.Categories">
+            <option value="">-- All Categories --</option>
+        </select>
+    </div>
+
+    <button type="submit">Search</button>
+
+</form>
+
+<hr />
+
+<table>
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Available Quantity</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Category?.Name</td>
+                <td>@product.Price</td>
+                <td>@product.QuantityInStock</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -29,7 +29,14 @@ namespace InventoryOrderSystem.Controllers
                     var result = await signIn.PasswordSignInAsync(user.UserName!, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Index", "Home");
+                        if (await userManager.IsInRoleAsync(user, "Admin"))
+                        {
+                            return RedirectToAction("Index", "Products");
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Shop");
+                        }
                     }
                     else
                     {

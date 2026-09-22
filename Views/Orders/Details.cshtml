@@ -1,0 +1,68 @@
+@model InventoryOrderSystem.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+<h2>Order Details</h2>
+
+<div class="mb-4">
+    <p><strong>Order Number:</strong> @Model.OrderNumber</p>
+    <p><strong>User:</strong> @Model.CreatedByUser?.UserName</p>
+    <p><strong>Order Date:</strong> @Model.CreatedDate.ToLocalTime().ToString("g")</p>
+    <p><strong>Status:</strong> @Model.Status</p>
+</div>
+
+<h4>Products</h4>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Product?.Name</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@((item.Quantity * item.UnitPrice).ToString("C"))</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-end">
+    <h4>
+        Order Total: @Model.TotalAmount.ToString("C")
+    </h4>
+</div>
+
+@if (User.IsInRole("Admin") && Model.Status == OrderStatus.Pending)
+{
+    <div class="mt-3">
+        <form asp-action="Confirm" asp-route-id="@Model.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-success">
+                Confirm Order
+            </button>
+        </form>
+
+        <form asp-action="Cancel" asp-route-id="@Model.Id" method="post" class="d-inline">
+            <button type="submit" class="btn btn-danger">
+                Cancel Order
+            </button>
+        </form>
+    </div>
+}
+
+<div class="mt-3">
+    <a asp-action="Index" class="btn btn-secondary">
+        Back to Orders
+    </a>
+</div>

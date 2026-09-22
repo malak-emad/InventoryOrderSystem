@@ -1,0 +1,30 @@
+@model IEnumerable<InventoryOrderSystem.Models.Category>
+
+<h2>Categories</h2>
+
+<a asp-action="Create">Create New Category</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@category.Id">Edit</a>
+                    |
+                    <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
