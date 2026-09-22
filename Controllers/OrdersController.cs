@@ -12,6 +12,7 @@ namespace InventoryOrderSystem.Controllers
     [Authorize]
     public class OrdersController(ApplicationDbContext applicationDb, UserManager<ApplicationUser> userManager) : Controller
     {
+        // 1- Create order
         [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<ActionResult> Create()
@@ -69,6 +70,7 @@ namespace InventoryOrderSystem.Controllers
             return View(model);
         }
 
+        // 2- View Orders
         // List orders: all of them for Admin, only the logged-in user's own for everyone else
         [HttpGet]
         public async Task<ActionResult> Index()
@@ -93,7 +95,8 @@ namespace InventoryOrderSystem.Controllers
             }
         }
 
-        //Show one order's full breakdown, blocked if it's not yours and you're not Admin
+        // 3- Show a specific order details
+        // Show one order's full breakdown, blocked if it's not yours and you're not Admin
         [HttpGet]
         public async Task<ActionResult> Details(int Id)
         {
@@ -113,7 +116,7 @@ namespace InventoryOrderSystem.Controllers
             return View(order);
         }
 
-        // Admin can change order status to Confirmed
+        // 4- Admin can change order status to Confirmed
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -131,7 +134,7 @@ namespace InventoryOrderSystem.Controllers
             return RedirectToAction(nameof(Details), new { id });
         }
 
-        // Admin can change order status to Cancelled
+        // 5- Admin can change order status to Cancelled
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]

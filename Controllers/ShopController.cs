@@ -10,6 +10,7 @@ namespace InventoryOrderSystem.Controllers
 
     public class ShopController(ApplicationDbContext applicationDb) : Controller
     {
+        // Show all products
         [HttpGet]
         public async Task<ActionResult> Index(string? name, int? categoryId)
         {

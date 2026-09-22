@@ -3,13 +3,12 @@ using InventoryOrderSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using System.Threading.Tasks;
-
 
 namespace InventoryOrderSystem.Controllers 
 {
     public class AccountController(SignInManager<ApplicationUser> signIn, UserManager<ApplicationUser> userManager) : Controller
     {
+        // Login Function
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
@@ -51,6 +50,8 @@ namespace InventoryOrderSystem.Controllers
             }
             return View(model);
         }
+
+        // Logout Function
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
@@ -59,6 +60,7 @@ namespace InventoryOrderSystem.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        // Access Denied 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult AccessDenied()

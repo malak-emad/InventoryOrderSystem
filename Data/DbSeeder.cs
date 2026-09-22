@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using InventoryOrderSystem.Models;
 
 namespace InventoryOrderSystem.Data
