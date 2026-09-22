@@ -51,6 +51,24 @@ namespace InventoryOrderSystem.Data
                     throw new Exception(string.Join("; ", result.Errors.Select(e => e.Description)));
                 }
             }
+            if (await userManager.FindByEmailAsync("user2@test.com") == null)
+            {
+                ApplicationUser user = new ApplicationUser();
+                user.UserName = "user2@test.com";
+                user.Email = "user2@test.com";
+                user.EmailConfirmed = true;
+
+                var result = await userManager.CreateAsync(user, "User123");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "User");
+                }
+                else
+                {
+                    throw new Exception(string.Join("; ", result.Errors.Select(e => e.Description)));
+                }
+            }
         }
     }
 }

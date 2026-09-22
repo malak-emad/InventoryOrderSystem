@@ -1,23 +1,31 @@
 @model InventoryOrderSystem.Models.Category
 
+@{
+    ViewData["Title"] = "Create Category";
+}
+
 <h2>Create Category</h2>
 
 <form asp-action="Create" method="post">
 
-    <div>
-        <label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="Description"></label>
-        <input asp-for="Description" />
-        <span asp-validation-for="Description"></span>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
-    <button type="submit">Create</button>
+    <button type="submit" class="btn btn-primary">
+        Create
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Back to Categories
+    </a>
 
 </form>
-
-<a asp-action="Index">Back to Categories</a>

@@ -1,10 +1,16 @@
 @model IEnumerable<InventoryOrderSystem.Models.Category>
 
+@{
+    ViewData["Title"] = "Categories";
+}
+
 <h2>Categories</h2>
 
-<a asp-action="Create">Create New Category</a>
+<a asp-action="Create" class="btn btn-primary mb-3">
+    Create New Category
+</a>
 
-<table>
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Name</th>
@@ -20,9 +26,17 @@
                 <td>@category.Name</td>
                 <td>@category.Description</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@category.Id">Edit</a>
-                    |
-                    <a asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                    <a asp-action="Edit"
+                       asp-route-id="@category.Id"
+                       class="btn btn-secondary btn-sm">
+                        Edit
+                    </a>
+
+                    <a asp-action="Delete"
+                       asp-route-id="@category.Id"
+                       class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
                 </td>
             </tr>
         }

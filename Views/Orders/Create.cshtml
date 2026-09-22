@@ -4,22 +4,24 @@
 
 <form asp-action="Create" method="post">
 
-    <div>
-        <label asp-for="ProductId">Product</label>
-        <select asp-for="ProductId" asp-items="ViewBag.Products">
+    <div class="mb-3">
+        <label asp-for="ProductId" class="form-label">Product</label>
+        <select asp-for="ProductId" asp-items="ViewBag.Products" class="form-select">
             <option value="">-- Select Product --</option>
         </select>
-        <span asp-validation-for="ProductId"></span>
+        <span asp-validation-for="ProductId" class="text-danger"></span>
     </div>
 
-    <div>
-        <label asp-for="Quantity">Quantity</label>
-        <input asp-for="Quantity" type="number" min="1" />
-        <span asp-validation-for="Quantity"></span>
+    <div class="mb-3">
+        <label asp-for="Quantity" class="form-label">Quantity</label>
+        <input asp-for="Quantity" type="number" min="1" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger"></span>
     </div>
 
-    <button type="submit">Create Order</button>
+    <button type="submit" class="btn btn-primary">Create Order</button>
 
 </form>
 
-<a asp-controller="Shop" asp-action="Index">Back to Shop</a>
+<a asp-controller="Shop" asp-action="Index" class="btn btn-secondary mt-2">
+    Back to Shop
+</a>

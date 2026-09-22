@@ -2,28 +2,25 @@
 
 <h2>Shop</h2>
 
-<form asp-action="Index" method="get">
-
-    <div>
-        <label for="name">Product Name</label>
-        <input type="text" id="name" name="name" value="@Context.Request.Query["name"]" />
+<form asp-action="Index" method="get" class="row g-2 mb-3">
+    <div class="col-auto">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" id="name" name="name" value="@Context.Request.Query["name"]" class="form-control" />
     </div>
 
-    <div>
-        <label for="categoryId">Category</label>
-
-        <select id="categoryId" name="categoryId" asp-items="ViewBag.Categories">
+    <div class="col-auto">
+        <label for="categoryId" class="form-label">Category</label>
+        <select id="categoryId" name="categoryId" asp-items="ViewBag.Categories" class="form-select">
             <option value="">-- All Categories --</option>
         </select>
     </div>
 
-    <button type="submit">Search</button>
-
+    <div class="col-auto align-self-end">
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
 </form>
 
-<hr />
-
-<table>
+<table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Product Name</th>
@@ -39,7 +36,7 @@
             <tr>
                 <td>@product.Name</td>
                 <td>@product.Category?.Name</td>
-                <td>@product.Price</td>
+                <td>@product.Price.ToString("C")</td>
                 <td>@product.QuantityInStock</td>
             </tr>
         }

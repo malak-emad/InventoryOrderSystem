@@ -12,6 +12,7 @@ namespace InventoryOrderSystem.Controllers
     [Authorize]
     public class OrdersController(ApplicationDbContext applicationDb, UserManager<ApplicationUser> userManager) : Controller
     {
+        [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<ActionResult> Create()
         {
@@ -20,6 +21,7 @@ namespace InventoryOrderSystem.Controllers
             return View(new CreateOrderViewModel());
         }
 
+        [Authorize(Roles = "User")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public async Task<ActionResult> Create(CreateOrderViewModel model)
@@ -34,7 +36,7 @@ namespace InventoryOrderSystem.Controllers
                 var availableQuantity = product.QuantityInStock;
                 if(model.Quantity > availableQuantity)
                 {
-                    ModelState.AddModelError("Product", "Insufficient stock");
+                    ModelState.AddModelError("ProductId", "Insufficient stock");
                     var _activeProducts = await applicationDb.Products.Where(p=> p.IsActive == true).ToListAsync();
                     ViewBag.Products = new SelectList( _activeProducts, "Id","Name", model.ProductId);
                     return View(model);
@@ -52,7 +54,7 @@ namespace InventoryOrderSystem.Controllers
                 order.TotalAmount = totalCost;
                 
                 OrderItem orderItem = new OrderItem();
-                orderItem.ProductId = model.ProductId;
+                orderItem.ProductId = model.ProductId!.Value;
                 orderItem.Quantity = model.Quantity;
                 orderItem.UnitPrice = price;
                 order.OrderItems.Add(orderItem);
